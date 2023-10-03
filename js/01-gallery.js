@@ -1,4 +1,4 @@
-import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 import * as basicLightbox from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.1.1/dist/basicLightbox.min.js';
 
