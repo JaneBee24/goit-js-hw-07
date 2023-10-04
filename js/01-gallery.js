@@ -1,6 +1,7 @@
 
 // Change code below this line
-import * as basicLightbox from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.1.1/dist/basicLightbox.min.js';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 const galleryItems = [
   {
