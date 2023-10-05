@@ -1,7 +1,8 @@
 
 // Change code below this line
-import * as basicLightbox from 'basiclightbox';
+import * as basicLightbox from 'basiclightbox/dist/basicLightbox.min.js';
 import 'basiclightbox/dist/basicLightbox.min.css';
+
 
 const galleryItems = [
   {
