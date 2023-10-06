@@ -1,5 +1,6 @@
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
+import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.js';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
 
 const galleryList = document.querySelector('.gallery');
 
