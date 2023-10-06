@@ -1,6 +1,6 @@
 
 // Change code below this line
-import * as basicLightbox from 'basiclightbox/dist/basicLightbox.min.js';
+import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 
