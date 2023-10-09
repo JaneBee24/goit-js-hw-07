@@ -71,48 +71,24 @@ const galleryItems = [
 
   galleryList.innerHTML = galleryItems.map(item => `
     <li class="gallery__item">
-      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); openModal(${galleryItems.indexOf(item)})">
-        <img
-          class="gallery__image"
-          src="${item.preview}"
-          data-source="${item.original}"
-          alt="${item.description}"
-        />
+      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); openModal('${item.original}', '${item.description}')">
+        <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
       </a>
     </li>
   `).join('');
   
-  function openModal(index) {
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
+  function openModal(imageUrl, description) {
+    const instance = new SimpleLightbox(`
+      <img src="${imageUrl}" alt="${description}">
+    `);
   
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-  
-    const image = document.createElement('img');
-    image.src = galleryItems[index].original;
-    image.alt = galleryItems[index].description;
-  
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Close';
-    closeBtn.addEventListener('click', closeModal);
-  
-    modal.appendChild(image);
-    modal.appendChild(closeBtn);
-    overlay.appendChild(modal);
-  
-    document.body.appendChild(overlay);
-  
+    instance.show();
     document.addEventListener('keydown', onKeyPress);
-  
-    function closeModal() {
-      overlay.remove();
-      document.removeEventListener('keydown', onKeyPress);
-    }
   
     function onKeyPress(e) {
       if (e.code === 'Escape') {
-        closeModal();
+        instance.close();
+        document.removeEventListener('keydown', onKeyPress);
       }
     }
   }
