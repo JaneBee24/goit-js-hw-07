@@ -1,7 +1,7 @@
 const SimpleLightbox = window.SimpleLightbox;
 
 document.addEventListener('DOMContentLoaded', function () {
-   const galleryItems = [
+       const galleryItems = [
         {
           preview:
             'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -67,19 +67,18 @@ document.addEventListener('DOMContentLoaded', function () {
         },
       ];
 
-  const galleryList = document.querySelector('.gallery');
+      const galleryList = document.querySelector('.gallery');
 
-  galleryList.innerHTML = galleryItems.map(item => `
-    <li class="gallery__item">
-      <a class="gallery__link" href="${item.original}">
-        <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
-      </a>
-    </li>
-  `).join('');
-  const lightbox = new SimpleLightbox('.gallery a');
-
-  lightbox.on('show.simplelightbox', function (e) {
-    const description = e.target.alt;
-    e.caption.innerHTML = description;
-  });
-});
+      galleryList.innerHTML = galleryItems.map(item => `
+        <li class="gallery__item">
+          <a class="gallery__link" href="${item.original}">
+            <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+          </a>
+        </li>
+      `).join('');
+    
+      const lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+      });
+    });
