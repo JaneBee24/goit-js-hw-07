@@ -1,5 +1,3 @@
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
 
 
 const galleryItems = [
@@ -69,46 +67,52 @@ const galleryItems = [
   ];
   
 
-const galleryList = document.querySelector('.gallery');
+  const galleryList = document.querySelector('.gallery');
 
-galleryList.innerHTML = galleryItems.map(item => `
-  <li class="gallery__item">
-    <a class="gallery__link" href="${item.original}" onclick="event.preventDefault()">
-      <img
-        class="gallery__image"
-        src="${item.preview}"
-        data-source="${item.original}"
-        alt="${item.description}"
-      />
-    </a>
-  </li>
-`).join('');
-
-galleryList.addEventListener('click', onGalleryItemClick);
-
-function onGalleryItemClick(event) {
-  const target = event.target;
-
-  if (target.nodeName === 'IMG') {
-    const index = Array.from(galleryList.children).indexOf(target.parentNode);
-    openModal(index);
-  }
-}
-
-function openModal(index) {
-  const image = galleryItems[index].original;
-  const instance = basicLightbox.create(`
-    <img src="${image}" alt="${galleryItems[index].description}">
-  `);
-
-  instance.show();
-  document.addEventListener('keydown', onKeyPress);
-
-  function onKeyPress(e) {
-    if (e.code === 'Escape') {
-      instance.close();
+  galleryList.innerHTML = galleryItems.map(item => `
+    <li class="gallery__item">
+      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); openModal(${galleryItems.indexOf(item)})">
+        <img
+          class="gallery__image"
+          src="${item.preview}"
+          data-source="${item.original}"
+          alt="${item.description}"
+        />
+      </a>
+    </li>
+  `).join('');
+  
+  function openModal(index) {
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+  
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+  
+    const image = document.createElement('img');
+    image.src = galleryItems[index].original;
+    image.alt = galleryItems[index].description;
+  
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Close';
+    closeBtn.addEventListener('click', closeModal);
+  
+    modal.appendChild(image);
+    modal.appendChild(closeBtn);
+    overlay.appendChild(modal);
+  
+    document.body.appendChild(overlay);
+  
+    document.addEventListener('keydown', onKeyPress);
+  
+    function closeModal() {
+      overlay.remove();
       document.removeEventListener('keydown', onKeyPress);
     }
+  
+    function onKeyPress(e) {
+      if (e.code === 'Escape') {
+        closeModal();
+      }
+    }
   }
-}
-console.log(galleryItems);
