@@ -1,4 +1,5 @@
-import SimpleLightbox from 'simplelightbox/dist/simpleLightbox.esm.js';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simpleLightbox.min.css';
 
 const galleryItems = [
     {
