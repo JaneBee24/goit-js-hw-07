@@ -78,7 +78,7 @@ const galleryItems = [
   `).join('');
   
   function openModal(imageUrl, description) {
-    const instance = new SimpleLightbox(`
+    const instance = basicLightbox.create(`
       <img src="${imageUrl}" alt="${description}">
     `);
   
