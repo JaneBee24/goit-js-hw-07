@@ -1,5 +1,4 @@
-// 01-gallery.js
-import basicLightbox from 'basiclightbox/dist/basicLightbox.esm.min.js';
+import basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 const galleryItems = [
