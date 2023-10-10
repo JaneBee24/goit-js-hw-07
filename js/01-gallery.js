@@ -67,20 +67,31 @@ const galleryItems = [
     },
   ];
   
-
   const galleryList = document.querySelector('.gallery');
 
   galleryList.innerHTML = galleryItems.map(item => `
     <li class="gallery__item">
-      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); openModal('${item.original}', '${item.description}')">
+      <a class="gallery__link" href="${item.original}">
         <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
       </a>
     </li>
   `).join('');
   
-  function openModal(imageUrl, description) {
+  galleryList.addEventListener('click', onGalleryItemClick);
+
+  function onGalleryItemClick(event) {
+    const target = event.target;
+  
+    if (target.nodeName === 'IMG') {
+      const index = Array.from(galleryList.children).indexOf(target.parentNode);
+      openModal(index);
+    }
+  }
+  
+  function openModal(index) {
+    const image = galleryItems[index].original;
     const instance = basicLightbox.create(`
-      <img src="${imageUrl}" alt="${description}">
+      <img src="${image}" alt="${galleryItems[index].description}">
     `);
   
     instance.show();
