@@ -72,7 +72,7 @@ const galleryItems = [
 
   galleryList.innerHTML = galleryItems.map(item => `
     <li class="gallery__item">
-      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); відкритиМодальне('${item.original}', '${item.description}')">
+      <a class="gallery__link" href="${item.original}" onclick="event.preventDefault(); openModal('${item.original}', '${item.description}')">
         <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
       </a>
     </li>
