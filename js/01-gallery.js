@@ -1,6 +1,4 @@
-import basicLightbox from 'basiclightbox/dist/basicLightbox.min.js';
-import 'basiclightbox/dist/basicLightbox.min.css';
-
+import basicLightbox from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.esm.min.js';
 
 const galleryItems = [
   {
@@ -86,7 +84,13 @@ function onGalleryItemClick(event) {
 
   if (target.nodeName === 'IMG') {
     const index = Array.from(galleryList.children).indexOf(target.parentNode);
-    openModal(index);
+
+    // Перевірте, чи індекс знаходиться в межах допустимого діапазону
+    if (index >= 0 && index < galleryItems.length) {
+      openModal(index);
+    } else {
+      console.error('Invalid index:', index);
+    }
   }
 }
 
