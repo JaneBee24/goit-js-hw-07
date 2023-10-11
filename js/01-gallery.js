@@ -1,7 +1,8 @@
+// 01-gallery.js
 
 import basicLightbox from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js';
 
-const galleryItems = [
+ const galleryItems = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -73,7 +74,7 @@ const galleryList = document.querySelector('.gallery');
 galleryList.innerHTML = galleryItems.map(item => `
   <li class="gallery__item">
     <a class="gallery__link" href="${item.original}">
-      <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+      <img class="gallery__image" src="${item.preview}" data-source="${item.original}" alt="${item.description}" />
     </a>
   </li>
 `).join('');
@@ -81,15 +82,12 @@ galleryList.innerHTML = galleryItems.map(item => `
 galleryList.addEventListener('click', onGalleryItemClick);
 
 function onGalleryItemClick(event) {
+  event.preventDefault(); 
   const target = event.target;
 
   if (target.nodeName === 'IMG') {
     const index = Array.from(galleryList.children).indexOf(target.parentNode);
-    if (index >= 0 && index < galleryItems.length) {
-      openModal(index);
-    } else {
-      console.error('Invalid index:', index);
-    }
+    openModal(index);
   }
 }
 
