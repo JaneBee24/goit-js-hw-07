@@ -84,8 +84,6 @@ function onGalleryItemClick(event) {
 
   if (target.nodeName === 'IMG') {
     const index = Array.from(galleryList.children).indexOf(target.parentNode);
-
-    // Перевірте, чи індекс знаходиться в межах допустимого діапазону
     if (index >= 0 && index < galleryItems.length) {
       openModal(index);
     } else {
