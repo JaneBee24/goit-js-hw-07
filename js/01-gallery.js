@@ -1,6 +1,6 @@
 import { create as basicLightbox } from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js';
 
- const galleryItems = [
+const galleryItems = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -80,7 +80,7 @@ galleryList.innerHTML = galleryItems.map(item => `
 galleryList.addEventListener('click', onGalleryItemClick);
 
 function onGalleryItemClick(event) {
-  event.preventDefault(); 
+  event.preventDefault();
   const target = event.target;
 
   if (target.nodeName === 'IMG') {
