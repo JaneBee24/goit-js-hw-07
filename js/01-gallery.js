@@ -1,5 +1,6 @@
 import * as basicLightbox from 'https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js';
 
+const galleryList = document.querySelector('.gallery');
 const galleryItems = [
   {
     preview:
@@ -67,8 +68,6 @@ const galleryItems = [
 ];
 
 
-const galleryList = document.querySelector('.gallery');
-
 galleryList.innerHTML = galleryItems.map(item => `
   <li class="gallery__item">
     <a class="gallery__link" href="${item.original}">
@@ -90,9 +89,8 @@ function onGalleryItemClick(event) {
 }
 
 function openModal(index) {
-  const image = galleryItems[index].original;
   const instance = basicLightbox.create(`
-    <img src="${image}" alt="${galleryItems[index].description}">
+    <img src="${galleryItems[index].original}" alt="${galleryItems[index].description}">
   `);
 
   instance.show();
