@@ -68,6 +68,8 @@ const galleryItems = [
 ];
 
 
+const galleryList = document.querySelector('.gallery');
+
 galleryList.innerHTML = galleryItems.map(item => `
   <li class="gallery__item">
     <a class="gallery__link" href="${item.original}">
@@ -79,7 +81,7 @@ galleryList.innerHTML = galleryItems.map(item => `
 galleryList.addEventListener('click', onGalleryItemClick);
 
 function onGalleryItemClick(event) {
-  event.preventDefault();
+  event.preventDefault(); 
   const target = event.target;
 
   if (target.nodeName === 'IMG') {
@@ -89,17 +91,21 @@ function onGalleryItemClick(event) {
 }
 
 function openModal(index) {
-  const instance = basicLightbox.create(`
-    <img src="${galleryItems[index].original}" alt="${galleryItems[index].description}">
-  `);
+  if (index >= 0 && index < galleryItems.length && galleryItems[index]) {
+    const instance = basicLightbox.create(`
+      <img src="${galleryItems[index].original}" alt="${galleryItems[index].description}">
+    `);
 
-  instance.show();
-  document.addEventListener('keydown', onKeyPress);
+    instance.show();
+    document.addEventListener('keydown', onKeyPress);
 
-  function onKeyPress(e) {
-    if (e.code === 'Escape') {
-      instance.close();
-      document.removeEventListener('keydown', onKeyPress);
+    function onKeyPress(e) {
+      if (e.code === 'Escape') {
+        instance.close();
+        document.removeEventListener('keydown', onKeyPress);
+      }
     }
+  } else {
+    console.error('Invalid index or item not found:', index);
   }
 }
