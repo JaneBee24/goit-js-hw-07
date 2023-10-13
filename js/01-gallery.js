@@ -94,7 +94,7 @@ function openModal(index) {
   
   if (currentItem) {
     const image = currentItem.original;
-    const instance = basicLightbox.create(`
+    const instance = new basicLightbox(`
       <img src="${image}" alt="${currentItem.description}">
     `);
 
@@ -109,3 +109,8 @@ function openModal(index) {
     }
   }
 }
+
+
+
+
+
