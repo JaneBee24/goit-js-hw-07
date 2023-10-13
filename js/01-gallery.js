@@ -79,19 +79,23 @@ galleryList.innerHTML = galleryItems.map(item => `
 galleryList.addEventListener('click', onGalleryItemClick);
 
 function onGalleryItemClick(event) {
-  event.preventDefault(); 
+  event.preventDefault();
   const target = event.target;
+  const galleryItem = target.closest('.gallery__item');
 
-  if (target.nodeName === 'IMG') {
-    const index = Array.from(galleryList.children).indexOf(target.parentNode);
+  if (galleryItem) {
+    const index = Array.from(galleryList.children).indexOf(galleryItem);
     openModal(index);
   }
 }
 
 function openModal(index) {
-  if (index >= 0 && index < galleryItems.length && galleryItems[index]) {
+  const currentItem = galleryItems[index];
+  
+  if (currentItem) {
+    const image = currentItem.original;
     const instance = basicLightbox.create(`
-      <img src="${galleryItems[index].original}" alt="${galleryItems[index].description}">
+      <img src="${image}" alt="${currentItem.description}">
     `);
 
     instance.show();
@@ -103,7 +107,5 @@ function openModal(index) {
         document.removeEventListener('keydown', onKeyPress);
       }
     }
-  } else {
-    console.error('Invalid index or item not found:', index);
   }
 }
